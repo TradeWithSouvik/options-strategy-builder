@@ -1,0 +1,13 @@
+.env
+node_modules
+.env
+.env-dev
+error
+engine_old.js
+.ipynb_checkpoints
+*all.csv
+*data.csv
+*equity_curve.csv
+*vix.csv
+*data.json
+stat.csv
