@@ -116,10 +116,8 @@ Where
 
 ```javascript
 const builder = require("options-strategy-builder")
-
+//Example of BANKNIFTY Straddle at 9:20 am with full price sl on both legs
 const tradeFunction = async(currentTradeData, ocData, context)=>{
-
-    //Example of BANKNIFTY Straddle at 9:20 am with full price sl on both legs
     let orders=[]
     const currentDate=new Date(ocData.currentTimestamp)
     if(!context.isEnd){
@@ -129,13 +127,13 @@ const tradeFunction = async(currentTradeData, ocData, context)=>{
             context.sl=ocData.optionChainData[ocData.strikeAtm].call.ltp+ocData.optionChainData[ocData.strikeAtm].put.ltp
         }
         else if(context.strikeAtm&&currentTradeData.legs[context.strikeAtm]&&currentTradeData.legs[context.strikeAtm].put.pnl<-context.sl){
-            orders=[{legType:"PUT",opType:"BUY",strike:context.strikeAtm,quantity:1}]
+            orders=[{legType:"PUT",opType:"BUY",strike:context.strikeAtm,quantity:1},{legType:"CALL",opType:"BUY",strike:context.strikeAtm,quantity:1}]
             context.isEnd=true
         }
         else if(context.strikeAtm&&currentTradeData.legs[context.strikeAtm]&&currentTradeData.legs[context.strikeAtm].call.pnl<-context.sl){
-            orders=[{legType:"CALL",opType:"BUY",strike:context.strikeAtm,quantity:1}]
-            context.strikeAtm=strikeAtm
+            orders=[{legType:"PUT",opType:"BUY",strike:context.strikeAtm,quantity:1},{legType:"CALL",opType:"BUY",strike:context.strikeAtm,quantity:1}]
             context.isEnd=true
+            
         }
     }
     return {orders,context}
