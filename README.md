@@ -49,9 +49,16 @@ Where
          pnl:number,
          legs:{
              <strikePrice>:{
-                 ltp:number,
-                 quantity:number,
-                 opType:<BUY/SELL>
+                 call:{
+                    ltp:number,
+                    quantity:number,
+                    opType:<BUY/SELL>
+                 },
+                 put:{
+                    ltp:number,
+                    quantity:number,
+                    opType:<BUY/SELL>
+                 }
              }
          }
      }
