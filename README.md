@@ -45,18 +45,18 @@ Where
 **currentTradeData**
 ```   
     { 
-         bookedPnl:number,
-         pnl:number,
+         bookedPnl:number (Float),
+         pnl:number (Float),
          legs:{
              <strikePrice>:{
                  call:[{
-                    ltp:number,
-                    quantity:number,
+                    ltp:number (Float),
+                    quantity:number (Integer eg. 1,2),
                     opType:<BUY/SELL>
                  },...],
                  put:[{
-                    ltp:number,
-                    quantity:number,
+                    ltp:number (Float),
+                    quantity:number (Integer eg. 1,2),
                     opType:<BUY/SELL>
                  },...]
              }
@@ -66,31 +66,28 @@ Where
 **ocData**
 ```
     {
-         currentTimestamp:number,
-         expiryTimestamp:number,
-         daysToExpiry:number,
-         volatility:number,
-         lotSize:number,
-         futurePrice:number,
-         spotPrice:number,
-         strikeAtm:number,
-         strikeDiff:number,
+         currentTimestamp:number (Timestamp in millis),
+         expiryTimestamp:number (Timestamp in millis),
+         daysToExpiry:number (Integer eg. 1,2),
+         volatility:number (Float),
+         lotSize:number (Integer eg. 50),
+         futurePrice:number (Float),
+         spotPrice:number (Float),
+         strikeAtm:number (Integer eg. 17800,18000),
+         strikeDiff:number (Integer eg. 50),
          optionChainData:{
                  <strikePrice>:{
                              call :{
-                                 ltp:number, 
-                                 strike:number, 
-                                 delta:number, 
-                                 vega:number, 
-                                 iv:number
+                                 ltp:number (Float), 
+                                 strike:number (Integer eg. 17800,18000), 
+                                 delta:number (Integer ranging from 0 to 100), 
+                                 iv:number (Float)
                              },
                              put :{
-                                 ltp:number, 
-                                 strike:number, 
-                                 delta:number, 
-                                 vega:number, 
-                                 iv:number
-
+                                 ltp:number (Float), 
+                                 strike:number (Integer eg. 17800,18000),  
+                                 delta:number (Integer ranging from 0 to 100),  
+                                 iv:number (Float)
                              }
                      }
              }
@@ -109,8 +106,8 @@ Where
     [{
         legType:<PUT/CALL>,
         opType:<BUY/SELL>,
-        strike:<strike to be executed>,
-        quantity:<number of lots>
+        strike:<strike to be executed> (Integer eg. 17800,18000),
+        quantity:<number of lots> (Integer eg. 1,2)
     },...]
 ```
 **context**
