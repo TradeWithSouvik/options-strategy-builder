@@ -1,6 +1,6 @@
 # Options Strategy Builder
 
-### We support Nifty and Banknifty Options intraday backtesting from Jan 2019 in 5 minute time frame.
+### We support Nifty and Banknifty Options backtesting from Jan 2019 in 5 minute time frame.
 ---
 ## Quickstart
 
@@ -16,13 +16,13 @@
 
 **3. Run the module**
 
-`await builder(timings={open:{daysToExpiry:1,hour:15,min:30},close:{daysToExpiry:0,hour:9,min:20}},,script,tradeFunction,intermediateCallbackFunction)`
+`await builder(timings={open:{daysToExpiry:1,hour:15,min:30},close:{daysToExpiry:0,hour:9,min:20}},script,tradeFunction,intermediateCallbackFunction)`
 
 Where
 
   * **timings** is a configuration storing trade open and close times
   * **script** is the script you want to backtest on. For now we support "NIFTY" and "BANKNIFTY" as valid script value
-  * **tradeFunction** is the function which will define all the trade decisions taken intraday
+  * **tradeFunction** is the function which will define all the trade decisions taken within a trade
   * **intermediateCallbackFunction** is the function sends update as the backtesting is being performed
 
 **4. Define tradeFunction**
@@ -146,7 +146,7 @@ const tradeFunction = async(currentTradeData, ocData, context)=>{
 
 ;(async()=>{
     try{
-        const result=await builder(0,"BANKNIFTY",tradeFunction,(updateData)=>{
+        const result=await builder({open:{daysToExpiry:0,hour:9,min:20},close:{daysToExpiry:0,hour:15,min:30}},"BANKNIFTY",tradeFunction,(updateData)=>{
             console.log(updateData)
         })
         console.log(result)
