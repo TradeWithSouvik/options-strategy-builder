@@ -18,7 +18,7 @@ socket.on("disconnect", () => {
 
 
 
-module.exports=(daysToExpiry,script,intradayTradeFn,intermediateCallback)=>{
+module.exports=(timings,script,intradayTradeFn,intermediateCallback)=>{
     return new Promise((resolve,reject)=>{
         if(running){
             reject("Code Already running")
@@ -29,7 +29,7 @@ module.exports=(daysToExpiry,script,intradayTradeFn,intermediateCallback)=>{
         socket.once("run-trades-"+socket.id+_uuid,(_)=>{running=false;resolve(_)})
         socket.once("run-trades-fail-"+socket.id+_uuid,(_)=>{running=false;reject(_)})
         socket.emit("run-trades",{
-            daysToExpiry,script,intradayTradeFn:intradayTradeFn.toString(),id:socket.id+_uuid
+            timings,script,intradayTradeFn:intradayTradeFn.toString(),id:socket.id+_uuid
         })
     })
     

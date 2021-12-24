@@ -16,11 +16,11 @@
 
 **3. Run the module**
 
-`await builder(daysToExpiry,script,tradeFunction,intermediateCallbackFunction)`
+`await builder(timings={open:{daysToExpiry:1,hour:15,min:30},close:{daysToExpiry:0,hour:9,min:20}},,script,tradeFunction,intermediateCallbackFunction)`
 
 Where
 
-  * **daysToExpiry** is the days remaining for expiry. 0 would mean expiry day. and 1 would mean a day before expiry
+  * **timings** is a configuration storing trade open and close times
   * **script** is the script you want to backtest on. For now we support "NIFTY" and "BANKNIFTY" as valid script value
   * **tradeFunction** is the function which will define all the trade decisions taken intraday
   * **intermediateCallbackFunction** is the function sends update as the backtesting is being performed
