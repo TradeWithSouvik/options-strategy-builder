@@ -16,12 +16,13 @@
 
 **3. Run the module**
 
-`await builder(timings={open:{daysToExpiry:1,hour:15,min:30},close:{daysToExpiry:0,hour:9,min:20}},script,tradeFunction,intermediateCallbackFunction)`
+`await builder(timings={open:{daysToExpiry:1,hour:15,min:30},close:{daysToExpiry:0,hour:9,min:20}},script,tradeFunction,options,intermediateCallbackFunction)`
 
 Where
 
   * **timings** is a configuration storing trade open and close times
   * **script** is the script you want to backtest on. For now we support "NIFTY" and "BANKNIFTY" as valid script value
+  * **options** additional control parameters if needed
   * **tradeFunction** is the function which will define all the trade decisions taken within a trade
   * **intermediateCallbackFunction** is the function sends update as the backtesting is being performed
 
@@ -121,7 +122,7 @@ Where
 ```javascript
 const builder = require("options-strategy-builder")
 //Example of BANKNIFTY Straddle at 9:20 am with full price sl on both legs
-const tradeFunction = async(currentTradeData, ocData, context)=>{
+const tradeFunction = async(currentTradeData, ocData, context,timings,script,options)=>{
     let orders=[]
     const currentDate=new Date(ocData.currentTimestamp)
     if(!context.isEnd){
